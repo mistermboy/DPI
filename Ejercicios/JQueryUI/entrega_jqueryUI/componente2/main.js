@@ -5,15 +5,56 @@ let first = undefined;
 let second = undefined;
 let firsti = undefined;
 let secondi = undefined;
-let cards = ["card1.png", "card2.png", "card3.png", "card4.png", "card5.png", "card6.png", "card1.png", "card2.png", "card3.png", "card4.png", "card5.png", "card6.png"];
-
+let cards = getCards()
 
 let found = false;
 let number_of_pairs = 0;
+
+
+let previousSelected = undefined;
+let currentSelected = undefined;
+let pareja = false;
+
 $(function () {
     $("button").button().click(function (event) {
         event.preventDefault();
+   
+        console.log({previous:previousSelected,current:currentSelected,pareja:pareja})
+        if(!pareja && currentSelected!=undefined){
+            console.log("entra")
+            $('#'+previousSelected).empty()
+            $('#'+currentSelected).empty()
+            previousSelected = undefined
+            currentSelected = undefined
+        }
 
+        if(previousSelected==undefined){
+     
+            previousSelected = event.currentTarget.id
+            let img = document.createElement("img");
+            img.setAttribute("src", "img/" +previousSelected+'.png');
+            event.currentTarget.append(img)
+           
+        }else{
+
+            currentSelected = event.currentTarget.id
+            let img = document.createElement("img");
+            img.setAttribute("src", "img/" +currentSelected+'.png');
+            event.currentTarget.append(img)
+
+            if(previousSelected == currentSelected){
+                pareja = true
+            }else{
+                pareja = false
+            }
+        }
+
+     
+
+      
+        
+
+        /*
         if (number_of_pairs < 6) {
 
             if (first != undefined) {
@@ -44,6 +85,7 @@ $(function () {
                 event.currentTarget.append(img)
             }
         }
+        */
     });
 });
 
@@ -64,9 +106,9 @@ function getCards(){
 
 function generateCards() {
     let cards = getCards()
-    let cardNumber = Math.floor(Math.random() * (cards.length - 0));
+    let cardNumber = Math.floor(Math.random() * (cards.length - 0))
     for (let i = 0; i < 12; i++) {
-        let card = cards.splice(cardNumber, 1);
+        let card = cards.splice(cardNumber, 1)
         let cardId = card[0].split('.png')[0]
         let cardBtn = $("<button>")
         cardBtn.attr("id",cardId)
@@ -74,8 +116,8 @@ function generateCards() {
         let cardImg = $("<img>")
         cardImg.attr("src","img/" + card)
         $('#buttons').append(cardBtn);
-        cardNumber = Math.floor(Math.random() * (cards.length - 0));
+        cardNumber = Math.floor(Math.random() * (cards.length - 0))
     }
 
 }
-generateCards();
+generateCards()
