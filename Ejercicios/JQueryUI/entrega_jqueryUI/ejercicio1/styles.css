@@ -1,0 +1,68 @@
+
+body{
+  display: grid;
+  justify-content: center;
+}
+
+.main{
+  height: 50vh;
+  width: 120vh;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 12% 10% 80%;
+  gap: 10px;
+}
+
+.datePickerContainer{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 14% 20% auto;
+}
+
+
+
+#btn-apply{
+  height: 24px;
+}
+
+.dates{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto ;
+  gap: 1px;
+}
+
+.day{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222;
+}
+
+.times{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto ;
+  grid-template-rows: auto auto auto;
+  gap: 1px;
+}
+
+.morning{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222;
+}
+
+.afternoon{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222;
+}
+
+.night{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222;
+}

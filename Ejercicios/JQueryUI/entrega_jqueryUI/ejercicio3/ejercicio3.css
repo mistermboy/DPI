@@ -1,0 +1,28 @@
+#feedback {
+    font-size: 1.4em;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    background-color: #2196F3;
+    padding: 10px;
+    grid-gap: 1em;
+  }
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 0;
+  font-size: 30px;
+  text-align: center;
+  width: 100px;
+  height: 150px;
+  overflow: hidden;
+  background-image: url("img/card.jpg");
+  background-size: 100px 150px;
+}
+.grid-item img{
+  width: 300px;
+  height: 350px;
+  margin: -75px 0 0 -100px;
+}
