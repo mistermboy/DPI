@@ -1,104 +1,59 @@
-$(function () {
-
-});
-let first = undefined;
-let second = undefined;
-let firsti = undefined;
-let secondi = undefined;
-let cards = getCards()
-
-let found = false;
-let number_of_pairs = 0;
-
-
 let previousSelected = undefined;
 let currentSelected = undefined;
 let pareja = false;
 
 $(function () {
-    $("button").button().click(function (event) {
+    $("button").button().click(async function (event) {
         event.preventDefault();
    
-        console.log({previous:previousSelected,current:currentSelected,pareja:pareja})
-        if(!pareja && currentSelected!=undefined){
-            console.log("entra")
-            $('#'+previousSelected).empty()
-            $('#'+currentSelected).empty()
-            previousSelected = undefined
-            currentSelected = undefined
-        }
-
         if(previousSelected==undefined){
-     
+
             previousSelected = event.currentTarget.id
-            let img = document.createElement("img");
-            img.setAttribute("src", "img/" +previousSelected+'.png');
-            event.currentTarget.append(img)
+            let img = $('<img>').attr("src", "img/" +extractPngId(previousSelected)+'.png');
+            $(this).append(img)
            
         }else{
 
             currentSelected = event.currentTarget.id
-            let img = document.createElement("img");
-            img.setAttribute("src", "img/" +currentSelected+'.png');
-            event.currentTarget.append(img)
+            let img = $('<img>').attr("src", "img/" +extractPngId(currentSelected)+'.png');
+            $(this).append(img)
 
-            if(previousSelected == currentSelected){
+            if(extractPngId(previousSelected) == extractPngId(currentSelected)){
                 pareja = true
+                previousSelected = undefined
+                currentSelected = undefined
             }else{
                 pareja = false
             }
         }
 
-     
-
-      
-        
-
-        /*
-        if (number_of_pairs < 6) {
-
-            if (first != undefined) {
-                second = event.currentTarget
-                let img = document.createElement("img");
-                img.setAttribute("src", "img/" + cards[parseInt(second.id.substr(first.id.length - 1))]);
-                event.currentTarget.append(img)
-                if (first.id.substr(first.id.length - 1) == second.id.substr(first.id.length - 1)) {
-                    found = true;
-                    number_of_pairs++;
-                } else {
-                    found = false;
-                }
-                firsti = first.id;
-                secondi = second.id;
-                first = undefined;
-                second = undefined;
-
-            } else {
-                if (!found && firsti && secondi) {
-                    $('#' + firsti).empty();
-                    $('#' + secondi).empty();
-                    found = false;
-                }
-                first = event.currentTarget;
-                let img = document.createElement("img");
-                img.setAttribute("src", "img/" + cards[parseInt(first.id.substr(first.id.length - 1))]);
-                event.currentTarget.append(img)
-            }
+        if(!pareja && currentSelected!=undefined){
+            await setTimeout(()=>{
+                $('#'+previousSelected).empty()
+                $('#'+currentSelected).empty()
+                previousSelected = undefined
+                currentSelected = undefined
+            },400)
         }
-        */
+
     });
 });
 
 
+
+function extractPngId(cardId){
+    if(cardId.includes('p1'))
+        return cardId.split("-p1")[0]
+    return cardId.split("-p2")[0]
+}
+
 function getCards(){
     let cards = []
-    let first = true;
     for(let i=1;i<7;i++){
-        cards.push("card"+i+'.png')
-        if(first && i==6){
-            first=false;
-            i=0
-        }
+        cards.push("card"+i+'-p1.png')
+    }
+    for(let i=1;i<7;i++){
+        cards.push("card"+i+'-p2.png')
     }
     return cards
 }
@@ -107,15 +62,15 @@ function getCards(){
 function generateCards() {
     let cards = getCards()
     let cardNumber = Math.floor(Math.random() * (cards.length - 0))
-    for (let i = 0; i < 12; i++) {
+    for (let i = 1; i <= 12; i++) {
         let card = cards.splice(cardNumber, 1)
         let cardId = card[0].split('.png')[0]
         let cardBtn = $("<button>")
         cardBtn.attr("id",cardId)
-        cardBtn.attr("class","grid-item")
+        cardBtn.attr("class","card-container")
         let cardImg = $("<img>")
-        cardImg.attr("src","img/" + card)
-        $('#buttons').append(cardBtn);
+        cardImg.attr("src","img/" + card[0].split('-')[0]+".png")
+        $('#game-container').append(cardBtn);
         cardNumber = Math.floor(Math.random() * (cards.length - 0))
     }
 
