@@ -52,9 +52,20 @@ function setClickListener(id,msg){
 }
 
 $( "#datepicker" ).datepicker();
+
 $("#btn-apply").click(function() {
     let selectedDate = $( "#datepicker" ).datepicker("getDate");
     console.log(selectedDate)
     fillTimeTable(selectedDate);
+    $('#set-time-btn').css('display','inline');
 });
+
+$("#set-time-btn").click(function() {
+    if(clicks>=2)
+        alert('Horario establecido con éxito')
+    else
+        alert('Selecciona al menos 2 franjas')
+});
+
+
 
