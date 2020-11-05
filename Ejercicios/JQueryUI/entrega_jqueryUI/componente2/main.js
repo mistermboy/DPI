@@ -20,6 +20,19 @@ $(function () {
 
             if(extractPngId(previousSelected) == extractPngId(currentSelected)){
                 pareja = true
+           
+                $('#'+previousSelected).unbind()
+                $('#'+previousSelected).click(function(){
+                    window.open(routes[$(this).attr('id').split('-')[0].split('card')[1]])
+                })
+
+            
+                $('#'+currentSelected).unbind()
+                $('#'+currentSelected).click(function(){
+                    window.open(routes[$(this).attr('id').split('-')[0].split('card')[1]])
+                })
+
+               
                 previousSelected = undefined
                 currentSelected = undefined
             }else{
@@ -38,6 +51,8 @@ $(function () {
 
     });
 });
+
+
 
 
 
@@ -76,3 +91,14 @@ function generateCards() {
 
 }
 generateCards()
+
+
+routes = [
+    'https://mtg.gamepedia.com/Black_Lotus',
+    'https://gatherer.wizards.com/pages/card/Details.aspx?name=Deathrite+Shaman',
+    'https://coppermind.net/wiki/Kelsier',
+    'https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=497502',
+    'https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=435220',
+    'https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=435206'
+
+]
