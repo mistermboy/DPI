@@ -23,13 +23,13 @@ $(function () {
            
                 $('#'+previousSelected).unbind()
                 $('#'+previousSelected).click(function(){
-                    window.open(routes[$(this).attr('id').split('-')[0].split('card')[1]])
+                    window.open(routes[$(this).attr('id').split('-')[0].split('card')[1]-1])
                 })
 
             
                 $('#'+currentSelected).unbind()
                 $('#'+currentSelected).click(function(){
-                    window.open(routes[$(this).attr('id').split('-')[0].split('card')[1]])
+                    window.open(routes[$(this).attr('id').split('-')[0].split('card')[1]-1])
                 })
 
                
@@ -41,12 +41,15 @@ $(function () {
         }
 
         if(!pareja && currentSelected!=undefined){
+            $("#game-container :input").attr("disabled", true);
             await setTimeout(()=>{
                 $('#'+previousSelected).empty()
                 $('#'+currentSelected).empty()
                 previousSelected = undefined
                 currentSelected = undefined
+                $("#game-container :input").attr("disabled", false);
             },400)
+            
         }
 
     });
