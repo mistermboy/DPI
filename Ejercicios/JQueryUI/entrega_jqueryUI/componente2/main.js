@@ -1,8 +1,21 @@
 let previousSelected = undefined;
 let currentSelected = undefined;
 let pareja = false;
-
+let numParejas = 0;
+let numPulsaciones = 0;
 $(function () {
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        show: {
+          effect: "blind",
+          duration: 1000
+        },
+        hide: {
+          effect: "explode",
+          duration: 1000
+        }
+      });
+
     $("button").button().click(async function (event) {
         event.preventDefault();
    
@@ -35,6 +48,7 @@ $(function () {
                
                 previousSelected = undefined
                 currentSelected = undefined
+                numParejas++
             }else{
                 pareja = false
             }
@@ -52,6 +66,15 @@ $(function () {
             
         }
 
+        numPulsaciones++
+        $('.num-pulsaciones').text("Pulsaciones: "+numPulsaciones)
+
+        if(numParejas==6){
+            numParejas =0 
+            $( "#dialog" ).dialog( "open" );
+        }
+            
+        
     });
 });
 
