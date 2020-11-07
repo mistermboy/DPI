@@ -21,7 +21,7 @@
     <div id="app" class="elements-container">
         <div v-for="person in people">
             <div class="element hvr-grow-shadow">
-                <img src="./img/luke.png">
+                <img  v-bind:src="'./img/'+person.name + '.png'" >
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">{{ person.name }}</h3>
                     <p>Birth Year: {{ person.birth_year }}</p>
