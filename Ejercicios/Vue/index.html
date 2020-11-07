@@ -18,18 +18,18 @@
         <h1>From World War to <br><strong id='title'>STAR WARS</strong></h1>
     </header>
 
-    <div id="app" class="elements-container">
-        <div v-for="person in people">
-            <div class="element hvr-grow-shadow">
-                <img  v-bind:src="'./img/'+person.name + '.png'" >
-                <div class="uk-card-body">
-                    <h3 class="uk-card-title">{{ person.name }}</h3>
-                    <p>Birth Year: {{ person.birth_year }}</p>
-                    <p>Gender: {{ person.gender }}</p>
-                    <p>Height: {{ person.height }} cm</p>
-                    
+    <div id="starwars-app" class="elements-container">
+        <div v-for="(person, itemObjKey) in people">
+            <a v-bind:href="'./character.html?characterId=' + itemObjKey ">
+                <div class="group-el element hvr-grow-shadow">
+                    <img  class="group-el" v-bind:src="'./img/'+person.name + '.png'" >
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">{{ person.name }}</h3>
+                        <p><strong class="property">Birth Year: </strong>{{ person.birth_year }}</p>
+                        <p><strong class="property">Gender: </strong>{{ person.gender }}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -37,24 +37,24 @@
 
     <script>
         new Vue({
-            el: '#app',
+            el: '#starwars-app',
             data: {
                 people: []
             },
             methods: {
-                async getPeople() {
+                async getStarWarsPeople() {
                     try {
-                        const response = await fetch('https://swapi.dev/api/people/')
-                        const data = await response.json()
+                        let response = await fetch('https://swapi.dev/api/people/')
+                        let data = await response.json()
                         this.people = data.results
-                        console.log(this.people)
                     } catch (error) {
-                        console.log(error);
+                        console.log('Error fetching data');
+                        console.log(error)
                     }
                 }
             },
             mounted: function () {
-                this.getPeople();
+                this.getStarWarsPeople();
             }
         })
     </script>

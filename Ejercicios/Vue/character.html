@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Star Wars</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./css/uikit.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>From World War to <br><strong id='title'>STAR WARS</strong></h1>
+    </header>
+
+    <div id="starwars-app" class="single-element-container">
+        <div class="element hvr-grow-shadow">
+            <img  class="single-img" v-bind:src="'./img/'+character.name + '.png'" >
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{ character.name }}</h3>
+                <p><strong class="property">Birth Year:</strong> {{ character.birth_year }}</p>
+                <p><strong class="property">Gender:</strong> {{ character.gender }}</p>
+                <p><strong class="property">Height:</strong> {{ character.height }} cm</p>
+                <p><strong class="property">Mass:</strong> {{ character.mass }} kg</p>
+                <p><strong class="property">Hair Color:</strong> {{ character.hair_color }}</p>
+                <p><strong class="property">Skin Color:</strong> {{ character.skin_color }}</p>
+                <p><strong class="property">Gender:</strong> {{ character.gender }}</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: '#starwars-app',
+            data: {
+                character: {}
+            },
+            methods: {
+                async getStarWarsPeople() {
+                    try {
+                        let characterId = parseInt(window.location.href.split('?')[1].split('characterId=')[1])+1;
+                        let response = await fetch('https://swapi.dev/api/people/'+characterId)
+                        let data = await response.json()
+                        this.character = data
+                    } catch (error) {
+                        console.log('Error fetching data');
+                        console.log(error)
+                    }
+                }
+            },
+            mounted: function () {
+                this.getStarWarsPeople();
+            }
+        })
+    </script>
+
+  
+
+</body>
+
+</html>
