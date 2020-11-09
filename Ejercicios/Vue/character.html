@@ -43,7 +43,7 @@
                 character: {}
             },
             methods: {
-                async getStarWarsPeople() {
+                async getStarWarsPeopleById() {
                     try {
                         let characterId = parseInt(window.location.href.split('?')[1].split('characterId=')[1])+1;
                         let response = await fetch('https://swapi.dev/api/people/'+characterId)
@@ -56,7 +56,7 @@
                 }
             },
             mounted: function () {
-                this.getStarWarsPeople();
+                this.getStarWarsPeopleById();
             }
         })
     </script>
