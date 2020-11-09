@@ -1,0 +1,56 @@
+body{
+  display: grid;
+  justify-content: center;
+  background-image: url("img/fondo.jpg");
+}
+
+h1{
+  color:white;
+}
+
+#game-container{
+  height: 80vh;
+  width: 150vh;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  align-items: center;
+}
+
+#feedback {
+    font-size: 1.4em;
+}
+
+
+.card-container {
+  overflow: hidden;
+  background-color: #ffffff;
+  background-image: url("img/card.png");
+  background-size: 100px 150px;
+  width: 100px;
+  height: 150px;
+  border: 1px solid #222;
+  transition: 0.3s;
+}
+
+.card-container:hover{
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  background-image: url("img/card.png") !important;
+  background-size: 100px 150px !important;
+  width: 100px !important;
+  height: 150px !important;
+  border: 1px solid #222 !important;
+  transform:  translate(0px, -30px) !important;
+  
+}
+
+.card-container > img{
+  margin: -75px 0 0 -100px;
+  width: 300px;
+  height: 350px;
+}
+
+
+
+
+
